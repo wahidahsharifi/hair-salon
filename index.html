@@ -137,32 +137,16 @@
                <h2>OUR LOOKBOOK</h2>
                <div></div>
             </section>
-            <section class="album" style="display: none">
-               <img src="#" alt="can't load" />
-               <img src="#" alt="can't load" />
-               <img src="#" alt="can't load" />
-               <img src="#" alt="can't load" />
-               <img src="#" alt="can't load" />
-               <img src="#" alt="can't load" />
+            <section class="album">
+               <img src="img/gallery/Gallery-01.jpg" alt="can't load" class="gallery g1" />
+               <img src="img/gallery/Gallery-02.jpg" alt="can't load" class="gallery g2" />
+               <img src="img/gallery/Gallery-04.jpg" alt="can't load" class="gallery g3" />
+               <img src="img/gallery/Masonry-01.jpg" alt="can't load" class="masonry m1" />
+               <img src="img/gallery/Masonry-02.jpg" alt="can't load" class="masonry m2" />
+               <img src="img/gallery/Masonry-03.jpg" alt="can't load" class="masonry m3" />
             </section>
          </section>
+         <script src="main.js"></script>
       </main>
-      <script>
-         window.onscroll = function () {
-            scrollFunction();
-         };
-
-         function scrollFunction() {
-            var header = document.getElementById("header");
-            if (
-               document.body.scrollTop > 5 ||
-               document.documentElement.scrollTop > 5
-            ) {
-               header.classList.add("scrolled");
-            } else {
-               header.classList.remove("scrolled");
-            }
-         }
-      </script>
    </body>
 </html>
