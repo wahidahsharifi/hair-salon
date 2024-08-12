@@ -35,7 +35,8 @@ header {
    position: fixed;
    height: 35px;
    padding: 0 5%;
-   background-color: #fff;
+   background-color: rgba(255, 255, 255, 0.7);
+   backdrop-filter: blur(10px);
    left: 0;
    right: 0;
    z-index: 2;
@@ -43,7 +44,8 @@ header {
 #h-check {
    display: none;
 }
-header > span, footer span {
+header > span,
+footer span {
    font: italic normal 900 20px Times;
    user-select: none;
    background: linear-gradient(45deg, #00f, #f00);
@@ -97,8 +99,7 @@ main {
    justify-content: space-between;
    align-items: center;
    width: 100%;
-   height: 100vh;
-   min-height: 800px;
+   height: clamp(800px, 100svh, 900px);
    background-image: url(img/hair-color-wallpaper.jpg);
    background-size: cover;
    background-position: right;
@@ -165,10 +166,11 @@ h1 {
          background-color: blue;
       }
       > h2 {
-         font-size: 15px;
+         font-size: 20px;
+         margin: 15px 0 0 0;
       }
       > p {
-         font-size: 13px;
+         font-size: 16px;
          text-align: center;
       }
    }
@@ -264,9 +266,9 @@ h1 {
          font-size: 1.5em;
       }
    }
-	> span:last-of-type{
-		text-shadow: none;
-	}
+   > span:last-of-type {
+      text-shadow: none;
+   }
 }
 
 /* album */
@@ -287,18 +289,32 @@ h1 {
 .album-head > div:active {
    background-color: #00f;
 }
- 
-.album{
-   display: flex;
-   flex-flow: row wrap;
-   justify-content: space-between;
-   align-items: start;
-   gap: 50px;
-   padding: 0 2%;
-   margin-bottom: -25%;
+
+.album {
+   display: grid;
+   grid-template-areas: "one two three" "four two six" "four five six";
+   gap: 20px;
 }
-.album > img{
-   width: 28.50%;
+.g1 {
+   grid-area: one;
+}
+.g2 {
+   grid-area: five;
+}
+.g3 {
+   grid-area: three;
+}
+.m1 {
+   grid-area: four;
+}
+.m2 {
+   grid-area: two;
+}
+.m3 {
+   grid-area: six;
+}
+.album > img {
+   width: 100%;
    object-fit: cover;
 }
 .album > .masonry {
@@ -307,31 +323,10 @@ h1 {
 .album > #lookbook {
    aspect-ratio: 1/1;
 }
-.g1{
-   order: 1;
-}
-.g2{
-   order: 5;
-}
-.g3{
-   order: 3;
-}
-.m1{
-   order: 4;
-   transform: translate(0px, -50%);
-}
-.m2{
-   order: 2;
-}
-.m3{
-   order: 6;
-   position: relative;
-   transform: translate(0px, -50%);
-}
-.active{
+.active {
    filter: contrast(0);
 }
-.clicked{
+.clicked {
    position: fixed;
    flex-flow: row nowrap;
    align-items: center;
@@ -349,9 +344,8 @@ footer span {
    font-size: 6vw;
 }
 .portfolio {
-   font-size: 6vw;
-   position: relative;
-   z-index: 4;
+   font-size: clamp(20px, 6vw, 100px);
+   margin-inline: 5%;
 }
 .portfolio > a {
    text-decoration: 2px underline #f00;
@@ -418,10 +412,10 @@ footer span {
          margin: 0 5%;
       }
    }
-	.color{
-		background-position: 450px 0;
-		text-shadow: 1px 1px 0px #fff;
-	}
+   .color {
+      background-position: 450px 0;
+      text-shadow: 1px 1px 0px #fff;
+   }
 }
 @media (width < 800px) {
    header > span {
@@ -439,7 +433,7 @@ footer span {
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
       width: 150px;
-      height: 100%;
+      height: 100svh;
       min-width: 50px;
       background-color: #fff;
       box-shadow: -7px 8px 20px 0px #000;
@@ -455,11 +449,14 @@ footer span {
          margin-top: 58px;
       }
    }
-   .album{
-      gap: 20px;
+   .album {
+      grid-template-areas:
+         "five two"
+         "three two"
+         "four six";
    }
-   .album img {
-      width: 30%;
+   .g1 {
+      display: none;
    }
    header > a {
       display: none;
@@ -493,11 +490,6 @@ footer span {
    .first-section > div > p {
       font-size: 15px;
    }
-   .colored {
-      padding: 80px 5%;
-   }
-}
-@media (width < 700px) {
    #services {
       flex-flow: column wrap;
       align-items: center;
@@ -505,15 +497,20 @@ footer span {
          margin: 20px 0;
       }
    }
+   .colored {
+      padding: 80px 5%;
+   }
+}
+@media (width < 700px) {
    .persons {
       flex-flow: column nowrap;
       > section {
          width: 100%;
       }
    }
-	.color{
-		background-position: 300px 0;
-	}
+   .color {
+      background-position: 300px 0;
+   }
    .colored {
       > span:first-child {
          font-size: 21px;
@@ -534,9 +531,9 @@ footer span {
    .album-head > h2 {
       font-size: 30px;
    }
-	.color{
-		background-position: 200px 0;
-	}
+   .color {
+      background-position: 200px 0;
+   }
    .colored {
       > span:first-child {
          font-size: 15px;
@@ -547,23 +544,25 @@ footer span {
       }
    }
    .album {
+      grid-template-areas:
+         "one"
+         "two"
+         "three"
+         "four"
+         "five"
+         "six";
+      margin-inline: 20px;
+   }
+   .g1 {
       display: block;
-      padding: 0 5%;
-      margin-bottom: 0;
-   }
-   .album img {
-      width: 100%;
-   }
-   .masonry {
-      transform: translate(0);
    }
 }
 @media (width < 400px) {
-   .first-section{
+   .first-section {
       flex-direction: column;
       justify-content: center;
       align-items: normal;
-      > span{
+      > span {
          writing-mode: lr;
          letter-spacing: 0.5px;
          margin: 0 0 0 5%;
@@ -580,11 +579,7 @@ footer span {
          text-align: center;
       }
    }
-   .video-txt h2{
+   .video-txt h2 {
       font-size: 25px;
-   }
-   .album > img{
-      width: 90%;
-      margin: 0 5%;
    }
 }
