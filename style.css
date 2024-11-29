@@ -6,6 +6,9 @@ html {
 body {
    margin: 0;
 }
+.body{
+   overflow: hidden;
+}
 a {
    text-decoration: none;
    color: #000;
@@ -45,7 +48,7 @@ header {
    display: none;
 }
 header > span,
-footer span {
+.portfolio span {
    font: italic normal 900 20px Times;
    user-select: none;
    background: linear-gradient(45deg, #00f, #f00);
@@ -323,33 +326,43 @@ h1 {
 .album > #lookbook {
    aspect-ratio: 1/1;
 }
-.active {
-   filter: contrast(0);
-}
-.clicked {
+/* clicked gallery */
+#lookbook .clicked {
    position: fixed;
-   flex-flow: row nowrap;
+   height: 100%;
+   width: 100%;
+   background: rgba(0, 0, 255, 0);
+   backdrop-filter: blur(100px);
+   display: flex;
+   flex-flow: column nowrap;
    align-items: center;
+   justify-content: center;
    z-index: 10;
-   top: 0%;
-   left: 5%;
+   top: 0;
+   left: 0;
+   margin: 0;
+}
+.clicked img:not(.active) {
+   display: none;
+}
+#lookbook .active {
+   height: 100%;
+   width: auto;
 }
 
-/* footer */
+/* portfolio */
 
-footer {
-   margin: 0 5%;
-}
-footer span {
-   font-size: 6vw;
-}
-.portfolio {
-   font-size: clamp(20px, 6vw, 100px);
+.portfolio, .portfolio span {
+   font-size: clamp(20px, 6vw, 50px);
+   user-select: auto;
    margin-inline: 5%;
 }
 .portfolio > a {
    text-decoration: 2px underline #f00;
    color: #00f;
+}
+.portfolio span{
+   margin: 0;
 }
 
 /* MEDIA */
@@ -542,19 +555,6 @@ footer span {
          font-size: 25px;
          line-height: 50px;
       }
-   }
-   .album {
-      grid-template-areas:
-         "one"
-         "two"
-         "three"
-         "four"
-         "five"
-         "six";
-      margin-inline: 20px;
-   }
-   .g1 {
-      display: block;
    }
 }
 @media (width < 400px) {
